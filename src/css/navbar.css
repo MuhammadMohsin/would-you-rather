@@ -1,0 +1,29 @@
+.navBar-container {
+    background-color: #232121;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.list-inline{
+    margin: 0;
+    color: #fff;
+}
+.list-inline > li{
+    display: inline;
+}
+.list-item-left {
+    display: inline-block;
+}
+.list-item-right {
+    display: inline-block;
+}
+.nav-item {
+    background-color: #1672c1;
+    padding: 10px 9px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    font-family: sans-serif;
+}

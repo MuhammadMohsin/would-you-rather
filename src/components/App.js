@@ -6,15 +6,17 @@ import Home from './Home';
 import Leaderboard from './Leaderboard';
 import AddQuestion from './AddQuestion';
 import ViewQuestions from './ViewQuestions.js';
+import NavBar from './NavBar';
 
 function App() {
   return (
     <div>
+      <NavBar />
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route path="/1" exact component={Home} />
         <Route path="/add" component={AddQuestion} />
         <Route path="/leaderboard" component={Leaderboard} />
-        <Route path="/login" exact component={Login} />
+        <Route path="/" exact component={Login} />
         <Route path="/questions/:id" component={ViewQuestions} />
         <Route component={DefaultComponent} />
       </Switch>
