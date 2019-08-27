@@ -27,3 +27,14 @@
     color: white;
     border-radius: 5px;
 }
+.logo-img {
+    height: 50px;
+    position: absolute;
+    left: 20px;
+    top: 9px;
+}
+.avatar {
+    height: 41px;
+    border-radius: 50px;
+    vertical-align: middle;
+}

@@ -2,7 +2,7 @@ let users = {
     sarahedo: {
         id: 'sarahedo',
         name: 'Sarah Edo',
-        avatarURL: 'https://tylermcginnis.com/would-you-rather/sarah.jpg"',
+        avatarURL: 'https://tylermcginnis.com/would-you-rather/sarah.jpg',
         answers: {
             "8xf0y6ziyjabvozdd253nd": 'optionOne',
             "6ni6ok3ym7mf1p33lnez": 'optionTwo',

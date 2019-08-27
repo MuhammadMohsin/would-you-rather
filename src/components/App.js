@@ -9,22 +9,36 @@ import ViewQuestions from './ViewQuestions.js';
 import NavBar from './NavBar';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
+import { setAuthUser, removeAuthUser, detectAuthUser } from '../actions/authUser';
+import PrivateRoute from '../components/ProtectedRoute';
 
 class App extends Component {
+
   componentDidMount() {
-    this.props.dispatch(handleInitialData())
+    this.props.dispatch(handleInitialData());
+    detectAuthUser((isAuth, userObj) => {
+      if (isAuth) {
+        this.props.dispatch(setAuthUser(userObj));
+      }
+    });
+  }
+
+  handleLogout = () => {
+    this.props.dispatch(removeAuthUser());
+    console.log(this.props)
+    // this.props.history.push('/login');
   }
 
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar handleLogout={this.handleLogout} />
         <Switch>
-          <Route path="/1" exact component={Home} />
-          <Route path="/add" component={AddQuestion} />
-          <Route path="/leaderboard" component={Leaderboard} />
-          <Route path="/" exact component={Login} />
-          <Route path="/questions/:id" component={ViewQuestions} />
+          <PrivateRoute path="/" exact component={Home} />
+          <PrivateRoute path="/add" component={AddQuestion} />
+          <PrivateRoute path="/leaderboard" component={Leaderboard} />
+          <Route path="/login" component={Login} />
+          <PrivateRoute path="/questions/:id" component={ViewQuestions} />
           <Route component={DefaultComponent} />
         </Switch>
       </div>
