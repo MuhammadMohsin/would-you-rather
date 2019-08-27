@@ -1,5 +1,6 @@
 .navBar-container {
     background-color: #232121;
+    box-shadow: 0px 0px 5px #353535;
     height: 65px;
     display: flex;
     align-items: center;
@@ -25,5 +26,4 @@
     text-decoration: none;
     color: white;
     border-radius: 5px;
-    font-family: sans-serif;
 }
