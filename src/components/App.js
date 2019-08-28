@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import DefaultComponent from './404Page';
 import Login from './Login';
 import Home from './Home';
@@ -25,8 +25,7 @@ class App extends Component {
 
   handleLogout = () => {
     this.props.dispatch(removeAuthUser());
-    console.log(this.props)
-    // this.props.history.push('/login');
+    this.props.history.push('/login');
   }
 
   render() {
@@ -46,4 +45,4 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+export default connect()(withRouter(App));

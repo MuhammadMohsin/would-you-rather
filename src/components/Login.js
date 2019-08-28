@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
 import '../css/login.css';
-import { Redirect } from 'react-router-dom';
 import TitleImg from '../assets/would-u-r.png';
 import { connect } from 'react-redux';
-import { setAuthUser, detectAuthUser } from '../actions/authUser';
+import { setAuthUser } from '../actions/authUser';
 
 class Login extends Component {
 
   state = {
-    selectedUserId: '',
-    isAuthenticated: false
-  }
-
-  componentDidMount(){
-    // detectAuthUser((isAuth)=>{
-    //   console.log(isAuth)
-    //   this.setState({isAuthenticated : isAuth})
-    // })
+    selectedUserId: ''
   }
 
   handleSignin = () => {
@@ -27,7 +18,7 @@ class Login extends Component {
   }
   render() {
     const { users } = this.props;
-    const { selectedUserId, isAuthenticated } = this.state;
+    const { selectedUserId } = this.state;
     const isDisabled = selectedUserId === '';
     return (
       <div className="login-container">
