@@ -1,19 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Tabs from './Tabs';
+import PollCard from './PollCard';
+import '../css/home.css';
 
-const Home = () => {
-    return (
-        <div className="home-container container-spec">
-            <Tabs>
-                <div label="Unanswered Questions">
-                    Unanswered Questions
-                </div>
-                <div label="Answered Questions">
-                    Answered Questions
-                </div>
-            </Tabs>
-        </div>
-    )
+class Home extends Component {
+
+    render() {
+        const { unansweredQuestions, answeredQuestions, users } = this.props;
+        return (
+            <div className="home-container container-spec">
+                <Tabs>
+                    <div label="Unanswered Questions">
+                        {unansweredQuestions.map(question =>
+                            <PollCard
+                                key={question.id}
+                                poll={question}
+                                author={users[question.author]} />
+                        )}
+                    </div>
+                    <div label="Answered Questions">
+                    {answeredQuestions.map(question =>
+                        <PollCard
+                            key={question.id}
+                            poll={question}
+                            author={users[question.author]} />
+                        )}
+                    </div>
+                </Tabs>
+            </div>
+        )
+    }
 }
-
-export default Home;
+function mapStateToProps({ questions, authUser, users }) {
+    const questionsList = Object.values(questions)
+    const userAnswers = authUser && authUser.answers ? Object.keys(authUser.answers) : [];
+    return {
+        users,
+        answeredQuestions: questionsList.filter((question) => userAnswers.includes(question.id))
+            .sort((a, b) => b.timestamp - a.timestamp),
+        unansweredQuestions: questionsList.filter((question) => !userAnswers.includes(question.id))
+            .sort((a, b) => b.timestamp - a.timestamp)
+    }
+}
+export default connect(mapStateToProps)(Home);

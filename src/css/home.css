@@ -1,0 +1,42 @@
+/* Poll Card */
+.poll-card-container{
+    height: 135px;
+    box-shadow: 0 0 5px #969696;
+    margin: 12px 0;
+    padding: 10px 15px;
+}
+.poll-card-container > label{
+    font-weight: 700;
+    border-bottom: 1px solid #e0e0e0;
+    display: block;
+    padding-bottom: 8px;
+}
+.poll-card-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 115px;
+}
+.poll-user-avatar {
+    height: 100px;
+    border-radius: 50%;
+}
+.poll-card-question{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    align-self: flex-start;
+}
+.poll-link{
+    text-decoration: none;
+    border: 1px solid #1672c1;
+    width: 100%;
+    color: #1672c1;
+    text-align: center;
+    border-radius: 4px;
+    padding: 8px 0px;
+    font-weight: 600;
+    font-size: 14px;
+}
