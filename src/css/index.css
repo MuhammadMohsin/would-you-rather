@@ -2,3 +2,8 @@ body {
     margin: 0;
     font-family: sans-serif;
 }
+.container-spec {
+    max-width: 535px;
+    margin: 0 auto;
+    margin-top: 15px;
+}

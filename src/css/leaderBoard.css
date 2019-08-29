@@ -1,0 +1,38 @@
+/* Leaderboard-Card */
+
+.leaderboard-card-container{
+    height: 150px;
+    box-shadow: 0 0 5px #969696;
+    margin: 12px 0;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.loaderboard-user-avatar {
+    height: 100px;
+    border-radius: 50%;
+}
+.score-details-container {
+    min-width: 273px;
+    border-left: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    padding: 0 10px;
+}
+.score-details-container > div {
+    display: flex;
+    justify-content: space-between;
+}
+.score-details-container > div > span {
+    font-weight: 700;
+    font-size: 16px;
+}
+.score-container {
+    text-align: center;
+    height: 110px;
+}
+.score-container > label {
+    color: #1672c1;
+    font-weight: 700;
+    font-size: 1.5em;
+}

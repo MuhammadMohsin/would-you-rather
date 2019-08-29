@@ -51,10 +51,9 @@ class Login extends Component {
   }
 }
 
-function mapStateToProps({ users, authUser }) {
+function mapStateToProps({ users }) {
   return {
-    users: Object.values(users),
-    authUser
+    users: Object.values(users)
   }
 }
 
