@@ -12,6 +12,10 @@ class Home extends Component {
         this.props.history.push(`/question/${poll.id}`);
     }
 
+    handleViewPoll = (poll, authorDetails) => {
+        this.props.dispatch(saveSelectedQuestion({poll, authorDetails}));
+        this.props.history.push(`/result/${poll.id}`);
+    }
     render() {
         const { unansweredQuestions, answeredQuestions, users } = this.props;
         return (
@@ -32,7 +36,7 @@ class Home extends Component {
                             key={question.id}
                             poll={question}
                             author={users[question.author]} 
-                            handleSelectPoll={(poll)=>this.handleSelectPoll(poll,users[question.author])}/>
+                            handleSelectPoll={(poll)=>this.handleViewPoll(poll,users[question.author])}/>
                         )}
                     </div>
                 </Tabs>
