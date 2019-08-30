@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const PollCard = ({ poll, author }) => {
+const PollCard = ({ poll, author, handleSelectPoll }) => {
     return (
         <div className="poll-card-container">
             <label>{author.name} asks:</label>
@@ -11,11 +10,11 @@ const PollCard = ({ poll, author }) => {
                     <h4>
                         Would you rather
                     </h4>
-                    <Link
-                        to={`/questions/${poll.id}`}
-                        className="poll-link">
+                    <button
+                        onClick={()=>handleSelectPoll(poll)}
+                        className="poll-btn">
                         View Poll
-                    </Link>
+                    </button>
                 </div>
             </div>
         </div>

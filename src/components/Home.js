@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Tabs from './Tabs';
 import PollCard from './PollCard';
+import { saveSelectedQuestion } from '../actions/questions';
 import '../css/home.css';
 
 class Home extends Component {
+
+    handleSelectPoll = (poll, authorDetails) => {
+        this.props.dispatch(saveSelectedQuestion({poll, authorDetails}));
+        this.props.history.push(`/questions/${poll.id}`);
+    }
 
     render() {
         const { unansweredQuestions, answeredQuestions, users } = this.props;
@@ -16,7 +22,8 @@ class Home extends Component {
                             <PollCard
                                 key={question.id}
                                 poll={question}
-                                author={users[question.author]} />
+                                author={users[question.author]} 
+                                handleSelectPoll={(poll)=>this.handleSelectPoll(poll,users[question.author])}/>
                         )}
                     </div>
                     <div label="Answered Questions">
@@ -24,7 +31,8 @@ class Home extends Component {
                         <PollCard
                             key={question.id}
                             poll={question}
-                            author={users[question.author]} />
+                            author={users[question.author]} 
+                            handleSelectPoll={(poll)=>this.handleSelectPoll(poll,users[question.author])}/>
                         )}
                     </div>
                 </Tabs>
@@ -33,7 +41,7 @@ class Home extends Component {
     }
 }
 function mapStateToProps({ questions, authUser, users }) {
-    const questionsList = Object.values(questions)
+    const questionsList = Object.values(questions.allQuestions)
     const userAnswers = authUser && authUser.answers ? Object.keys(authUser.answers) : [];
     return {
         users,

@@ -1,35 +1,41 @@
-/* Poll Card */
-.poll-card-container{
+/* Question Card */
+.question-card-container{
     height: 135px;
     box-shadow: 0 0 5px #969696;
     margin: 12px 0;
     padding: 10px 15px;
 }
-.poll-card-container > label{
+.question-card-container > label{
     font-weight: 700;
     border-bottom: 1px solid #e0e0e0;
     display: block;
     padding-bottom: 8px;
 }
-.poll-card-details {
+.question-card-details {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 115px;
 }
-.poll-user-avatar {
+.question-user-avatar {
     height: 100px;
     border-radius: 50%;
 }
-.poll-card-question{
-    width: 60%;
+.question-card-item{
+    width: 75%;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
     align-self: flex-start;
 }
-.poll-btn{
+.question-card-item > h4 {
+    margin: 7px 0;
+}
+.question-card-item > form {
+    width: 100%;
+}
+.question-btn{
     text-decoration: none;
     border: 1px solid #1672c1;
     width: 100%;
@@ -40,4 +46,5 @@
     font-weight: 600;
     font-size: 14px;
     background-color: transparent;
+    margin-top: 7px;
 }
