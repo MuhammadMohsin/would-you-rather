@@ -5,7 +5,8 @@ import Login from './Login';
 import Home from './Home';
 import Leaderboard from './Leaderboard';
 import AddQuestion from './AddQuestion';
-import Questions from './Questions.js';
+import Question from './Questions.js';
+import Result from './QuestionResult';
 import NavBar from './NavBar';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
@@ -37,7 +38,8 @@ class App extends Component {
           <PrivateRoute path="/add" component={AddQuestion} />
           <PrivateRoute path="/leaderboard" component={Leaderboard} />
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/questions/:id" component={Questions} />
+          <PrivateRoute path="/question/:id" component={Question} />
+          <PrivateRoute path="/result/:id" component={Result} />
           <Route component={DefaultComponent} />
         </Switch>
       </div>

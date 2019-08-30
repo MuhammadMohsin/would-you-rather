@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { saveSelectedQuestion } from '../actions/questions';
 import { handlePollAnswer } from '../actions/shared';
-
 import '../css/questions.css';
 
 class Questions extends Component {
@@ -15,7 +14,7 @@ class Questions extends Component {
         const { option } = this.state;
         const { selectedQuestion: { poll}, history, authUser } = this.props;
         this.props.dispatch(handlePollAnswer(authUser.id, poll.id, option, ()=>{
-            history.push('/')
+            history.push(`/result/${poll.id}`);
         }));
     }
     render() {
@@ -25,8 +24,7 @@ class Questions extends Component {
                 const questionId = match.params.id
                 const poll = allQuestions.find(q => q.id === questionId)
                 if (!(poll && poll.id)) {
-                    alert("Question does not exist!")
-                    history.push('/');
+                    history.push('/404-page');
                     return false;
                 }
                 else {

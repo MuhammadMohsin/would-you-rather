@@ -9,7 +9,7 @@ class Home extends Component {
 
     handleSelectPoll = (poll, authorDetails) => {
         this.props.dispatch(saveSelectedQuestion({poll, authorDetails}));
-        this.props.history.push(`/questions/${poll.id}`);
+        this.props.history.push(`/question/${poll.id}`);
     }
 
     render() {
