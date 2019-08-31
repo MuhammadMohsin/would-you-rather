@@ -1,6 +1,6 @@
-import { getInitialData, saveQuestionAnswer } from '../services/apiService';
-import { saveUsers, saveUserAnswer } from './users';
-import { saveQuestions, saveAnswer } from './questions';
+import { getInitialData, saveQuestionAnswer, saveNewQuestion } from '../services/apiService';
+import { saveUsers, saveUserAnswer, saveUserQuestion } from './users';
+import { saveQuestions, saveAnswer, saveQuestion } from './questions';
 import { setAuthUser } from './authUser';
 
 export function handleInitialData() {
@@ -22,5 +22,22 @@ export function handlePollAnswer(authUser, questionId, option, cb) {
                 dispatch(setAuthUser(users[authUser]));
                 cb();
             });
+    }
+}
+export function addNewQuestion(authUserId, { optionOneText, optionTwoText }, cb) {
+    const question = {
+        author: authUserId,
+        optionOneText,
+        optionTwoText
+    }
+    console.log(question)
+    return (dispatch, getState) => {
+        return saveNewQuestion(question).then((response) => {
+            dispatch(saveQuestion(response))
+            dispatch(saveUserQuestion(response.author, response.id))
+            const users = getState().users
+                dispatch(setAuthUser(users[authUserId]));
+                cb();
+        })
     }
 }

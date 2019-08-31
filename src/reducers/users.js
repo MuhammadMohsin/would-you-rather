@@ -1,4 +1,8 @@
-import { GET_USERS_SUCCESS,  SAVE_AUTHUSER_ANSWER} from '../actions/users'
+import { 
+    GET_USERS_SUCCESS,  
+    SAVE_AUTHUSER_ANSWER,
+    ADD_NEW_USER_QUESTION
+} from '../actions/users'
 
 export default function users(state = {}, action) {
     switch (action.type) {
@@ -18,6 +22,14 @@ export default function users(state = {}, action) {
                     }
                 }
             }
+        case ADD_NEW_USER_QUESTION :
+                    return {
+                      ...state,
+                      [action.user] : {
+                        ...state[action.user],
+                        questions: [...state[action.user].questions, action.qid]
+                      }
+                    }
         default:
             return state
     }

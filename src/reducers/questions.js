@@ -1,13 +1,16 @@
 import {
     GET_QUESTIONS_SUCCESS,
     SET_SELECTED_QUESTION,
-    SAVE_QUESTION_ANSWER
+    SAVE_QUESTION_ANSWER,
+    SAVE_NEW_QUESTION
 } from '../actions/questions';
 
 const initialState = {
     allQuestions: {},
     selectedQuestion: {}
 }
+let questionsBucket = {};
+
 export default function questions(state = initialState, action) {
     switch (action.type) {
         case GET_QUESTIONS_SUCCESS:
@@ -29,12 +32,19 @@ export default function questions(state = initialState, action) {
                     votes: votes.concat([action.authedUser])
                 }
             }
-            const allQuestions = Object.assign({}, state.allQuestions);
-            allQuestions[action.questionId] = updatedQuestion;
+            questionsBucket = Object.assign({}, state.allQuestions);
+            questionsBucket[action.questionId] = updatedQuestion;
             return {
                 ...state,
-                allQuestions
+                allQuestions: questionsBucket
             }
+        case SAVE_NEW_QUESTION:
+                questionsBucket = Object.assign({}, state.allQuestions);
+                questionsBucket[action.question.id] = action.question;
+                return {
+                    ...state,
+                    allQuestions: questionsBucket
+                }
         default:
             return state
     }

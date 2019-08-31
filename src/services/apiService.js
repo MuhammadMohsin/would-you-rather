@@ -18,6 +18,6 @@ export function saveQuestionAnswer(info) {
     return _saveQuestionAnswer(info)
 }
 
-export function saveQuestion(question) {
+export function saveNewQuestion(question) {
     return _saveQuestion(question)
 }
