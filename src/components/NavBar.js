@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import logoImg from '../assets/would-u-r.png';
 import '../css/navbar.css';
 
-const NavBar = ({ authUser, handleLogout }) => {
+const NavBar = ({ authUser, handleLogout, activePath }) => {
     const isAuthenticated = authUser && authUser.isAuthenticated ? true : false;
 
     return (
@@ -28,21 +28,21 @@ const NavBar = ({ authUser, handleLogout }) => {
                         </li>
                         <li>
                             <Link
-                                className="nav-item"
+                                className={`nav-item ${activePath === '/'? 'active': ''}`}
                                 to="/">
                                 Home
                         </Link>
                         </li>
                         <li>
                             <Link
-                                className="nav-item"
+                                className={`nav-item ${activePath === '/add'? 'active': ''}`}
                                 to="/add">
                                 Add Question
                         </Link>
                         </li>
                         <li>
                             <Link
-                                className="nav-item"
+                                className={`nav-item ${activePath === '/leaderboard'? 'active': ''}`}
                                 to="/leaderboard">
                                 Leader Board
                         </Link>
@@ -55,7 +55,7 @@ const NavBar = ({ authUser, handleLogout }) => {
                             <img src={authUser.avatarURL} alt={authUser.name} className="avatar"/>
                              {authUser.name}
                         </li>
-                        <li className="nav-item" onClick={handleLogout}>
+                        <li className="nav-item active" onClick={handleLogout}>
                             Logout
                         </li>
                     </ul>

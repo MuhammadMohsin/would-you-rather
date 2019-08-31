@@ -20,12 +20,15 @@
     display: inline-block;
 }
 .nav-item {
-    background-color: #1672c1;
     padding: 10px 9px;
     margin: 0 5px;
     text-decoration: none;
     color: white;
     border-radius: 5px;
+}
+.nav-item.active{
+    background-color: #1672c1;
+    cursor: pointer;
 }
 .logo-img {
     height: 50px;

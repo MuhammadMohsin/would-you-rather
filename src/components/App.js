@@ -15,6 +15,10 @@ import PrivateRoute from '../components/ProtectedRoute';
 
 class App extends Component {
 
+  state = {
+    activePath: "/"
+  }
+
   componentDidMount() {
     this.props.dispatch(handleInitialData());
     detectAuthUser((isAuth, userObj) => {
@@ -22,6 +26,12 @@ class App extends Component {
         this.props.dispatch(setAuthUser(userObj));
       }
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.setState({ activePath : this.props.location.pathname })
+    }
   }
 
   handleLogout = () => {
@@ -32,7 +42,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavBar handleLogout={this.handleLogout} />
+        <NavBar handleLogout={this.handleLogout} activePath={this.state.activePath} />
         <Switch>
           <PrivateRoute path="/" exact component={Home} />
           <PrivateRoute path="/add" component={AddQuestion} />
