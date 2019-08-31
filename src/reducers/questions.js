@@ -7,7 +7,10 @@ import {
 
 const initialState = {
     allQuestions: {},
-    selectedQuestion: {}
+    selectedQuestion: {
+        poll: {},
+        author: {}
+    }
 }
 let questionsBucket = {};
 

@@ -1,38 +1,61 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { saveSelectedQuestion } from '../actions/questions';
 import { handlePollAnswer } from '../actions/shared';
 import '../css/questions.css';
 
 class Questions extends Component {
 
     state = {
-        option: null
+        option: null,
+        selectedQuestion: {}
     }
     handleSubmit = (e) => {
         e.preventDefault();
         const { option } = this.state;
-        const { selectedQuestion: { poll}, history, authUser } = this.props;
-        this.props.dispatch(handlePollAnswer(authUser.id, poll.id, option, ()=>{
+        const { history, authUser } = this.props;
+        const { selectedQuestion: { poll } } = this.state;
+        this.props.dispatch(handlePollAnswer(authUser.id, poll.id, option, () => {
             history.push(`/result/${poll.id}`);
         }));
     }
-    render() {
-        const { users, selectedQuestion, allQuestions, match, history } = this.props;
-        if (!(selectedQuestion && selectedQuestion.poll && selectedQuestion.poll.id)) {
-            if (match && match.params.id && allQuestions.length) {
-                const questionId = match.params.id
-                const poll = allQuestions.find(q => q.id === questionId)
-                if (!(poll && poll.id)) {
-                    history.push('/404-page');
-                    return false;
-                }
-                else {
-                    const authorDetails = users[poll.author]
-                    this.props.dispatch(saveSelectedQuestion({ poll, authorDetails }));
+    static getDerivedStateFromProps(props, state) {
+        if (props.allQuestions && props.allQuestions.length) {
+            if (state.selectedQuestion.poll)
+                return null;
+            const { users, selectedQuestion, allQuestions, match, history } = props;
+
+            if (!(selectedQuestion && selectedQuestion.poll && selectedQuestion.poll.id)) {
+                if (match && match.params.id && allQuestions.length) {
+                    const questionId = match.params.id
+                    const poll = allQuestions.find(q => q.id === questionId)
+                    if (!(poll && poll.id)) {
+                        history.push('/404-page');
+                        return null;
+                    }
+                    else {
+                        const authorDetails = users[poll.author]
+                        return { selectedQuestion: { poll, authorDetails } };
+                    }
                 }
             }
+            else {
+                let question = { ...selectedQuestion };
+                const isValidQuestion = allQuestions.find(q => q.id === question.poll.id)
+                if (isValidQuestion) {
+                    question.poll = isValidQuestion;
+                    return { selectedQuestion: question }
+                }
+                else {
+                    props.history.push('/404-page');
+                }
+            }
+            return null;
         }
+        return null;
+    }
+    render() {
+        const { selectedQuestion } = this.state;
+
         return (
             selectedQuestion && selectedQuestion.authorDetails ?
                 <div className="questions-container container-spec">

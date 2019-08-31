@@ -8,12 +8,12 @@ import '../css/home.css';
 class Home extends Component {
 
     handleSelectPoll = (poll, authorDetails) => {
-        this.props.dispatch(saveSelectedQuestion({poll, authorDetails}));
+        this.props.dispatch(saveSelectedQuestion({poll: poll.id, authorDetails}));
         this.props.history.push(`/question/${poll.id}`);
     }
 
     handleViewPoll = (poll, authorDetails) => {
-        this.props.dispatch(saveSelectedQuestion({poll, authorDetails}));
+        this.props.dispatch(saveSelectedQuestion({poll: poll.id, authorDetails}));
         this.props.history.push(`/result/${poll.id}`);
     }
     render() {
